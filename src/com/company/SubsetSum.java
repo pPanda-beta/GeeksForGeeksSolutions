@@ -26,7 +26,12 @@ public class SubsetSum {
             int bucket1 = 0;
             int bucket2 = 0;
 
-            System.out.println(checkEquality(numbers, 0, bucket1, bucket2, numberOfElements, map));
+            boolean x = checkEquality(numbers, 0, bucket1, bucket2, numberOfElements, map);
+            if (x) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
         }
     }
 
@@ -52,10 +57,9 @@ public class SubsetSum {
             return true;
         }
 
-        boolean withoutThisNumber = checkEquality(numbers, index + 1, bucket1, bucket2, numberOfElements, map);
         boolean withThisNumberInBucket1 = checkEquality(numbers, index + 1, bucket1 + numbers[index], bucket2, numberOfElements, map);
         boolean withThisNumberInBucket2 = checkEquality(numbers, index + 1, bucket1, bucket2 + numbers[index], numberOfElements, map);
-        boolean possible = withoutThisNumber || withThisNumberInBucket1 || withThisNumberInBucket2;
+        boolean possible = withThisNumberInBucket1 || withThisNumberInBucket2;
         map.put(presentState, possible);
         return possible;
     }
